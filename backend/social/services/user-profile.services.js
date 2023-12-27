@@ -1,10 +1,10 @@
 const UserProfile = require("../api/models/user-profile");
 
-const storeUser = async (request = null) => {
+const storeUser = async (body) => {
 
   try {
 
-    const data = await UserProfile.query().insert(request)
+    const data = await UserProfile.query().insert(body)
 
     return {
       statusCode: 200,
@@ -22,11 +22,11 @@ const storeUser = async (request = null) => {
 }
 
 
-const updateUser = async (request = null, record = null) => {
+const updateUser = async (body, userId) => {
 
   try {
 
-    const data = await UserProfile.query().patch(request).where(record)
+    const data = await UserProfile.query().patch(body).where(userId)
 
     if (data == 1) {
 
@@ -76,11 +76,11 @@ const getAllUsers = async () => {
 }
 
 
-const getSingleUser = async (record = null) => {
+const getSingleUser = async (userId) => {
 
   try {
 
-    const data = await UserProfile.query().where(record).first()
+    const data = await UserProfile.query().where(userId).first()
 
     if (data) {
 
@@ -108,11 +108,11 @@ const getSingleUser = async (record = null) => {
 }
 
 
-const deleteUser = async (record = null) => {
+const deleteUser = async (userId) => {
 
   try {
 
-    const data = await UserProfile.query().delete().where(record)
+    const data = await UserProfile.query().delete().where(userId)
 
     if (data == 1) {
 

@@ -1,10 +1,10 @@
 const TenantProfile = require("../api/models/tenant-profile");
 
-const storeTenant = async (request = null) => {
+const storeTenant = async (body) => {
 
   try {
 
-    const data = await TenantProfile.query().insert(request)
+    const data = await TenantProfile.query().insert(body)
 
     return {
       statusCode: 200,
@@ -22,11 +22,11 @@ const storeTenant = async (request = null) => {
 }
 
 
-const updateTenant = async (request = null, record = null) => {
+const updateTenant = async (body, tenantId) => {
 
   try {
 
-    const data = await TenantProfile.query().patch(request).where(record)
+    const data = await TenantProfile.query().patch(body).where(tenantId)
 
     if (data == 1) {
 
@@ -76,11 +76,11 @@ const getAllTenants = async () => {
 }
 
 
-const getSingleTenant = async (record = null) => {
+const getSingleTenant = async (tenantId) => {
 
   try {
 
-    const data = await TenantProfile.query().where(record).first()
+    const data = await TenantProfile.query().where(tenantId).first()
 
     if (data) {
 
@@ -108,11 +108,11 @@ const getSingleTenant = async (record = null) => {
 }
 
 
-const deleteTenant = async (record = null) => {
+const deleteTenant = async (tenantId) => {
 
   try {
 
-    const data = await TenantProfile.query().delete().where(record)
+    const data = await TenantProfile.query().delete().where(tenantId)
 
     if (data == 1) {
 
